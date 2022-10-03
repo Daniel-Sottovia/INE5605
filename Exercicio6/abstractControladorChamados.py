@@ -36,7 +36,7 @@ class AbstractControladorChamados(ABC):
 		pass
 	
 	# Retorna os tipos de chamado que foram cadastrados no controlador pelo metodo inclui_tipochamado
-    @property	
+	@property
 	@abstractmethod
 	def tipos_chamados(self):
-	    pass
+		pass
