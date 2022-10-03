@@ -14,10 +14,9 @@ class ControladorChamados(AbstractControladorChamados):
 
     def total_chamados_por_tipo(self, tipo: TipoChamado):
         cont = 0
-        for chamada in self.__lista_tipo_chamadas:
-            if chamada == tipo:
+        for chamada in self.__lista_chamadas:
+            if chamada.tipo == tipo:
                 cont += 1
-
         return cont
 
     def inclui_chamado(self, data: Date, cliente: Cliente, tecnico: Tecnico, titulo: str, descricao: str, prioridade: int, tipo: TipoChamado):
@@ -27,7 +26,6 @@ class ControladorChamados(AbstractControladorChamados):
             if ind.tipo.codigo == chamada.tipo.codigo:
                 return
         self.__lista_chamadas.append(chamada)
-
         return chamada
 
     def inclui_tipochamado(self, codigo: int, nome: str, descricao: str):
@@ -36,11 +34,25 @@ class ControladorChamados(AbstractControladorChamados):
             if id.tipo.codigo == tipo.codigo:
                 return
         self.__lista_tipo_chamadas.append(tipo)
-
         return tipo
 
     def tipos_chamados(self):
-        final = defaultdict(int)
-        for id in self.__lista_chamadas:
-            final[id.tipo] += 1
-        return final
+        cont = 0
+        lista = []
+        for chamada in self.__lista_chamadas:
+            if len(lista) == 0:
+                lista.append(chamada.tipo)
+                cont += 1
+            else:
+                if chamada.tipo not in lista:
+                    cont += 1
+                    lista.append(chamada.tipo)
+        return cont
+
+def main():
+    daniel = ControladorChamados()
+
+    pass
+
+if __name__ == '__main__':
+    main()
