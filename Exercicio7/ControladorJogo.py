@@ -4,7 +4,8 @@ import random
 
 class ControladorJogo(AbstractControladorJogo):
     def __init__(self):
-        pass  # implementar
+        self.__lista_personagem = []
+        self.__baralho = []
 
     '''
     Retorna o baralho
@@ -13,7 +14,7 @@ class ControladorJogo(AbstractControladorJogo):
 
     @property
     def baralho(self) -> list:
-        pass  # implementar
+        return self.__baralho
 
     '''
     Retorna a lista de personagems
@@ -22,7 +23,7 @@ class ControladorJogo(AbstractControladorJogo):
 
     @property
     def personagems(self) -> list:
-        pass  # implementar
+        return self.__lista_personagem
 
     '''
     Permite incluir um novo Personagem na lista de personagens do jogo
@@ -41,7 +42,11 @@ class ControladorJogo(AbstractControladorJogo):
                                    velocidade: int,
                                    resistencia: int,
                                    tipo: Tipo) -> Personagem:
-        pass  # implementar
+        if not (isinstance(energia, int) and isinstance(habilidade, int) and isinstance(velocidade, int) and isinstance(resistencia, int) and isinstance(tipo, Tipo)):
+            return None
+        personagem = Personagem(energia=energia, habilidade=habilidade, velocidade=velocidade, resistencia=resistencia, tipo=tipo)
+        self.__lista_personagem.append(personagem)
+        return personagem
 
     '''
     Permite incluir uma nova Carta no baralho do jogo
@@ -50,7 +55,11 @@ class ControladorJogo(AbstractControladorJogo):
     '''
 
     def inclui_carta_no_baralho(self, personagem: Personagem) -> Carta:
-        pass  # implementar
+        if not (isinstance(personagem, Personagem)):
+            return None
+        carta = Carta(personagem=personagem)
+        self.__baralho.append(carta)
+        return carta
 
     '''
     Realiza uma jogada, ou seja:
@@ -77,4 +86,19 @@ class ControladorJogo(AbstractControladorJogo):
     '''
 
     def jogada(self, mesa: Mesa) -> Jogador:
-        pass  # implementar
+        if not (isinstance(mesa, Mesa)):
+            return None
+
+        if mesa.carta_jogador1.valor_total_carta() > mesa.carta_jogador2.valor_total_carta():
+            mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador2)
+        else:
+            if mesa.carta_jogador1.valor_total_carta() < mesa.carta_jogador2.valor_total_carta():
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador1)
+            else:
+                mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1)
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
+        if len(mesa.jogador1.mao) <= 0:
+            return mesa.jogador2
+        elif len(mesa.jogador2.mao) <= 0:
+            return mesa.jogador1
+        return None

@@ -13,8 +13,8 @@ class Carta(AbstractCarta):
     '''
 
     def valor_total_carta(self) -> int:
-        soma = self.__personagem.energia + self.__personagem.habilidade + self.__personagem.velocidade + self.__personagem.resistencia
-        return soma
+        self.__soma = self.__personagem.energia + self.__personagem.habilidade + self.__personagem.velocidade + self.__personagem.resistencia
+        return self.__soma
 
     @property
     def personagem(self) -> Personagem:
