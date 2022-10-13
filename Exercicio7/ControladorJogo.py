@@ -91,14 +91,16 @@ class ControladorJogo(AbstractControladorJogo):
 
         if mesa.carta_jogador1.valor_total_carta() > mesa.carta_jogador2.valor_total_carta():
             mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador2)
+            mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1)
         else:
             if mesa.carta_jogador1.valor_total_carta() < mesa.carta_jogador2.valor_total_carta():
                 mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador1)
+                mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
             else:
                 mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1)
                 mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
-        if len(mesa.jogador1.mao) <= 0:
+        if len(mesa.jogador1.mao) == 0:
             return mesa.jogador2
-        elif len(mesa.jogador2.mao) <= 0:
+        elif len(mesa.jogador2.mao) == 0:
             return mesa.jogador1
         return None
