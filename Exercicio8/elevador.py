@@ -6,11 +6,8 @@ from elevadorJahVazioException import ElevadorJahVazioException
 
 
 class Elevador(AbstractElevador):
-    def __init__(self,
-                capacidade: int,
-                total_pessoas: int,
-                total_andares: int,
-                andar_atual: int):
+    def __init__(self, capacidade: int, total_pessoas: int,
+                 total_andares: int, andar_atual: int):
         self.__capacidade = capacidade
         self.__total_pessoas = total_pessoas
         self.__total_andares = total_andares
@@ -28,20 +25,17 @@ class Elevador(AbstractElevador):
         else:
             self.__total_pessoas += 1
 
-
     def sai_pessoa(self) -> str:
         if self.__total_pessoas == 0:
             raise ElevadorJahVazioException
         else:
             self.__total_pessoas -= 1
 
-
     def subir(self) -> str:
         if self.__total_andares <= self.__andar_atual:
             raise ElevadorJahNoUltimoAndarException
         else:
             self.__andar_atual += 1
-
 
     @property
     def capacidade(self) -> int:
