@@ -40,7 +40,7 @@ class AbstractControladorElevador(ABC):
     @throws ElevadorJahVazioException
     '''
     @abstractmethod
-    def sai_pessoa() -> str:
+    def sai_pessoa(self) -> str:
         pass
 	
     '''

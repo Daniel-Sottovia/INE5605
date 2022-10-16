@@ -6,7 +6,11 @@ from elevadorJahVazioException import ElevadorJahVazioException
 
 
 class Elevador(AbstractElevador):
-    def __init__(self, capacidade: int, total_pessoas: int, total_andares: int, andar_atual: int):
+    def __init__(self,
+                capacidade: int,
+                total_pessoas: int,
+                total_andares: int,
+                andar_atual: int):
         self.__capacidade = capacidade
         self.__total_pessoas = total_pessoas
         self.__total_andares = total_andares
