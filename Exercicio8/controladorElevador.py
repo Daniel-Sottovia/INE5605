@@ -32,14 +32,12 @@ class ControladorElevador(AbstractControladorElevador):
         if not(isinstance(andar_atual, int)
                 and isinstance(total_andares_predio, int)
                 and isinstance(capacidade, int)
-                and isinstance(total_pessoas, int)):
-            raise ComandoInvalidoException
-        elif (andar_atual < 0
-                or total_pessoas < 0
-                or capacidade < 0
-                or total_andares_predio < 0):
-            raise ComandoInvalidoException
-        elif andar_atual > total_andares_predio or total_pessoas > capacidade:
+                and isinstance(total_pessoas, int)) or \
+                (andar_atual < 0
+                    or total_pessoas < 0 or capacidade < 0
+                    or total_andares_predio < 0) or \
+                (andar_atual > total_andares_predio
+                    or total_pessoas > capacidade):
             raise ComandoInvalidoException
         self.__elevador = Elevador(capacidade=capacidade,
                                    total_pessoas=total_pessoas,
