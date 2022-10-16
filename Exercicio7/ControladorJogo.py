@@ -42,9 +42,17 @@ class ControladorJogo(AbstractControladorJogo):
                                    velocidade: int,
                                    resistencia: int,
                                    tipo: Tipo) -> Personagem:
-        if not (isinstance(energia, int) and isinstance(habilidade, int) and isinstance(velocidade, int) and isinstance(resistencia, int) and isinstance(tipo, Tipo)):
+        if not (isinstance(energia, int)
+                and isinstance(habilidade, int)
+                and isinstance(velocidade, int)
+                and isinstance(resistencia, int)
+                and isinstance(tipo, Tipo)):
             return None
-        personagem = Personagem(energia=energia, habilidade=habilidade, velocidade=velocidade, resistencia=resistencia, tipo=tipo)
+        personagem = Personagem(energia=energia,
+                                habilidade=habilidade,
+                                velocidade=velocidade,
+                                resistencia=resistencia,
+                                tipo=tipo)
         self.__lista_personagem.append(personagem)
         return personagem
 
@@ -89,11 +97,13 @@ class ControladorJogo(AbstractControladorJogo):
         if not (isinstance(mesa, Mesa)):
             return None
 
-        if mesa.carta_jogador1.valor_total_carta() > mesa.carta_jogador2.valor_total_carta():
+        if (mesa.carta_jogador1.valor_total_carta()
+                > mesa.carta_jogador2.valor_total_carta()):
             mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador2)
             mesa.jogador1.inclui_carta_na_mao(mesa.carta_jogador1)
         else:
-            if mesa.carta_jogador1.valor_total_carta() < mesa.carta_jogador2.valor_total_carta():
+            if (mesa.carta_jogador1.valor_total_carta()
+                    < mesa.carta_jogador2.valor_total_carta()):
                 mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador1)
                 mesa.jogador2.inclui_carta_na_mao(mesa.carta_jogador2)
             else:

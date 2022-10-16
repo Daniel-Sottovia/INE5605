@@ -11,7 +11,6 @@ class Personagem(AbstractPersonagem):
         self.__resistencia = resistencia
         self.__tipo = tipo
 
-
     @property
     def tipo(self) -> Tipo:
         return self.__tipo
