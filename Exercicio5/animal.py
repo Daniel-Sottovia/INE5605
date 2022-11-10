@@ -16,8 +16,7 @@ class Animal(ABC):
 
     @abstractmethod
     def mover(self):
-        print(f'ANIMAL: DESCOLOU {self.__tamanho_passo}')
-        pass
+        return f'ANIMAL: DESLOCOU {self.__tamanho_passo}'
 
     @abstractmethod
     def produzir_som(self):

@@ -6,10 +6,7 @@ class Gato(Mamifero):
         super().__init__(volume_som= 2, tamanho_passo= 2)
 
     def mover(self):
-        super(Gato, self).mover()
-        pass
+        return super().mover()
 
     def miar(self):
-        super(Gato, self).produzir_som()
-        print('SOM: MIAU')
-        pass
+        return super(Gato, self).produzir_som() + ' SOM: MIAU'
