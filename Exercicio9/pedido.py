@@ -48,7 +48,6 @@ class Pedido():
     Retornar o item incluido em caso de sucesso e None em caso
     de item duplicado.
     '''
-
     def inclui_item_pedido(self, codigo, descricao, preco):
         for item in self.__itens:
             if item.codigo == codigo:
@@ -68,7 +67,6 @@ class Pedido():
                 self.__itens.remove(item)
                 return item
         return None
-
     '''
     Deve calcular o valor total do pedido, considerando um custo
     adicional pela distancia e fator por distancia percorrida. 
@@ -83,15 +81,27 @@ class Pedido():
     de 2 e o valor final 8.
     @return um float correspondente ao total do pedido
     '''
-
     def calcula_valor_pedido(self, distancia: float):
-        if isinstance(distancia, float):
-            soma = self.__tipo.fator_distancia * distancia
-            for produto in self.__itens:
-                soma += produto.preco_unitario
-                if isinstance(self.__cliente, ClienteFidelidade):
-                    soma = soma * (1 - self.__cliente.desconto)
-                    return soma
-                return soma
+        soma = 0
+        for produto in self.__itens:
+            soma += produto.preco_unitario
+        soma += self.__tipo.fator_distancia * distancia
+        if isinstance(self.__cliente, ClienteFidelidade):
+            soma = soma * (1 - self.__cliente.desconto)
+            return soma
+        return soma
 
 
+    def mostra_pedidos(self):
+        for pedidos in self.__itens:
+            print(pedidos.descricao)
+
+if __name__ == '__main__':
+    daniel = Cliente(cpf='123', nome='Daniel', endereco='Rua Coronel', telefone='9997')
+    caio = ClienteFidelidade(cpf='22',nome='Caio',endereco='Avendida Capital',telefone='6799',codigo_fidelidade=22,desconto=0.2)
+    urgente = TipoPedido(descricao='pedido urgente', fator_distancia=12)
+    pedido = Pedido(numero=12,cliente=caio, tipo=urgente)
+    pedido.inclui_item_pedido(codigo=444, descricao='bolacha', preco=13.99)
+    pedido.inclui_item_pedido(codigo=111, descricao='macarrao', preco=6.00)
+    pedido.mostra_pedidos()
+    print(pedido.calcula_valor_pedido(distancia=6))
