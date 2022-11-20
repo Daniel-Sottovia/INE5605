@@ -3,7 +3,8 @@ from cliente import Cliente
 
 class ClienteFidelidade(Cliente):
 
-    def __init__(self, cpf: str, nome: str, endereco: str, telefone: str, codigo_fidelidade: int, desconto: float):
+    def __init__(self, codigo_fidelidade: int, desconto: float, cpf: str,
+                 nome: str, endereco: str, telefone: str):
         super().__init__(cpf, nome, endereco, telefone)
         self.__codigo_fidelidade = codigo_fidelidade
         self.__desconto = desconto

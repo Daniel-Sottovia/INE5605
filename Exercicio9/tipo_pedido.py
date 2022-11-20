@@ -1,4 +1,5 @@
 
+
 class TipoPedido():
     '''
     O atributo fator_distancia eh um float que representa
@@ -13,7 +14,7 @@ class TipoPedido():
         return self.__descricao
 
     @descricao.setter
-    def descricao(self, descricao :str):
+    def descricao(self, descricao: str):
         if isinstance(descricao, str):
             self.__descricao = descricao
 
